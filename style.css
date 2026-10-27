@@ -1,0 +1,109 @@
+:root {
+    --colore-primario: #3498db;
+    --colore-primario-hover: #2980b9;
+    --colore-testo-scuro: #2c3e50;
+    --colore-titolo: #333333;
+    --colore-sfondo: #f4f4f9;
+    --colore-card: #ffffff;
+    --colore-testo-chiaro: #ffffff;
+    --ombra-card: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--colore-sfondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card */
+
+.counter-container {
+    background-color: var(--colore-card);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--ombra-card);
+    text-align: center;
+    width: 300px;
+}
+
+.counter-title {
+    font-size: 1.5rem;
+    color: var(--colore-titolo);
+    margin-bottom: 20px;
+}
+
+.counter-value {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--colore-testo-scuro);
+    margin-bottom: 30px;
+}
+
+.counter-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.counter-reset {
+    margin-top: 20px;
+}
+
+/* Pulsanti + e − */
+
+.btn {
+    font-family: inherit; 
+    font-size: 2rem;
+    width: 65px;
+    height: 65px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--colore-primario);
+    color: var(--colore-testo-chiaro);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+    background-color: var(--colore-primario-hover);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Pulsante Azzera */
+
+.btn-reset {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 8px 20px;
+    background-color: transparent;
+    color: var(--colore-primario);
+    border: 2px solid var(--colore-primario);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-reset:hover {
+    background-color: var(--colore-primario);
+    color: var(--colore-testo-chiaro);
+}
+
+/* Focus da tastiera per tutti i pulsanti */
+
+.btn:focus-visible,
+.btn-reset:focus-visible {
+    outline: 3px solid var(--colore-testo-scuro);
+    outline-offset: 4px;
+}
