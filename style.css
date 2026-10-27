@@ -71,6 +71,7 @@ body {
     background-color: var(--colore-primario);
     color: var(--colore-testo-chiaro);
     transition: background-color 0.2s, transform 0.1s;
+    touch-action: manipulation;
 }
 
 .btn:hover {
@@ -93,6 +94,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
+    touch-action: manipulation;
 }
 
 .btn-reset:hover {
