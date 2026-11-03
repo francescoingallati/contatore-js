@@ -1,7 +1,21 @@
 // Chiave unica per localStorage
-const STORAGE_KEY = 'valoreContatore';
+const STORAGE_KEY = 'contatore-js:valore';
 
-let count = Number(localStorage.getItem(STORAGE_KEY));
+let savedValue = 0;
+
+try {
+    savedValue = Number(localStorage.getItem(STORAGE_KEY));
+} catch (error) {
+    // storage bloccato: si parte da 0
+}
+
+let count;
+
+if (Number.isInteger(savedValue)) {
+    count = savedValue;
+} else {
+    count = 0;
+}
 
 function buildElement(tag, className, text) {
     const element = document.createElement(tag);
@@ -12,10 +26,18 @@ function buildElement(tag, className, text) {
     return element;
 }
 
-// Mostra e salva il valore
 function updateDisplay() {
     valueDisplay.textContent = count;
-    localStorage.setItem(STORAGE_KEY, count);
+    try {
+        localStorage.setItem(STORAGE_KEY, count);
+    } catch (error) {
+        // storage bloccato: non si salva
+    }
+}
+
+function changeBy(delta) {
+    count += delta;
+    updateDisplay();
 }
 
 // Creazione dell'interfaccia
@@ -48,13 +70,11 @@ updateDisplay();
 
 // Eventi
 btnIncrease.addEventListener('click', () => {
-    count++;
-    updateDisplay();
+    changeBy(1);
 });
 
 btnDecrease.addEventListener('click', () => {
-    count--;
-    updateDisplay();
+    changeBy(-1);
 });
 
 btnReset.addEventListener('click', () => {
