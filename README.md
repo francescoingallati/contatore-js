@@ -24,7 +24,7 @@ Progetto realizzato in JavaScript puro, senza librerie né framework: l'intera i
 
 - **HTML5**: un solo contenitore vuoto (`<div id="app">`), riempito da JavaScript
 - **CSS3**: variabili CSS (custom properties) per i colori, layout con Flexbox, pseudo-classi `:hover`, `:active` e `:focus-visible`
-- **JavaScript (ES6+)**: creazione degli elementi con `document.createElement`, gestione degli eventi con `addEventListener`, persistenza dei dati con `localStorage`
+- **JavaScript (ES6+)**: creazione degli elementi con `document.createElement`, gestione degli eventi con `addEventListener`, persistenza dei dati con `localStorage` e gestione degli errori con `try/catch`.
 
 ## Struttura del progetto
 
@@ -39,9 +39,10 @@ contatore-js/
 
 ## Come funziona
 
-- All'avvio il valore viene letto da `localStorage` e convertito in numero con `Number()`. Alla prima visita non c'è ancora nessun valore salvato: `getItem` restituisce `null` e `Number(null)` vale `0`, quindi il contatore parte da 0 senza bisogno di controlli aggiuntivi.
-- Tutti gli elementi dell'interfaccia vengono creati con una funzione di supporto, `buildElement`, che evita di ripetere lo stesso codice per ogni elemento.
-- Ogni modifica del valore passa da un'unica funzione, `updateDisplay`, che aggiorna il numero a schermo e lo salva. In questo modo visualizzazione e salvataggio non possono mai andare fuori sincrono.
+- **Un solo stato, un solo punto di aggiornamento.** Il valore del contatore vive nella variabile `count`. Ogni modifica passa dalla funzione `updateDisplay`, che aggiorna il numero a schermo e lo salva: visualizzazione e salvataggio non possono andare fuori sincrono.
+- **Valore letto sempre verificato.** All'avvio il valore salvato viene letto, convertito con `Number()` e accettato solo se `Number.isInteger` conferma che è un intero. In tutti gli altri casi (prima visita, valore corrotto, decimali o testo) il contatore parte da 0. La chiave di salvataggio, `contatore-js:valore`, è specifica del progetto, così da non entrare in conflitto con altri progetti pubblicati sullo stesso dominio.
+- **Funziona anche senza localStorage.** Lettura e scrittura sono protette da `try/catch`: se il browser blocca l'accesso ai dati, ad esempio per impostazioni di privacy, il contatore funziona normalmente, semplicemente senza ricordare il valore.
+- **Nessuna ripetizione.** Gli elementi dell'interfaccia vengono creati con la funzione di supporto `buildElement`, mentre `+` e `−` usano la stessa funzione `changeBy(delta)`, chiamata con `1` e `-1`.
 
 ## Provarla in locale
 
