@@ -1,6 +1,7 @@
 // Chiave unica per localStorage
 const STORAGE_KEY = 'contatore-js:valore';
 
+// Stato iniziale: valore salvato, se valido, altrimenti 0
 let savedValue = 0;
 
 try {
@@ -17,6 +18,7 @@ if (Number.isInteger(savedValue)) {
     count = 0;
 }
 
+// Funzioni
 function buildElement(tag, className, text) {
     const element = document.createElement(tag);
     element.className = className;
